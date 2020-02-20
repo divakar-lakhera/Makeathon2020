@@ -1,0 +1,5 @@
+
+Makeathon2020/env/*
+*.sln
+*.pyproj
+*.user
