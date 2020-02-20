@@ -1,5 +1,7 @@
 
 Makeathon2020/env/*
+Makeathon2020/__pycache__/*
 *.sln
 *.pyproj
 *.user
+.vs/Makeathon2020/v16/.suo
