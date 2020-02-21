@@ -13,6 +13,7 @@ class gitScraper():
 
 
     def loadProfile(self,link):
+        print("GitScraper Starting...")
         self.name=link
         raw_page=requests.get(link);
         raw_rep=requests.get(link+"?tab=repositories")
@@ -72,3 +73,11 @@ class gitScraper():
 
     def gitGetUserName(self):
         return self.html.find("span", {"itemprop": "name"}).get_text()
+
+    def gitGetLocation(self):
+        fetch=self.html.find('li',{"itemprop":"homeLocation"})
+        if(fetch != None):
+            return fetch.find('span',{'class':'p-label'}).get_text()
+        else:
+            return None
+
