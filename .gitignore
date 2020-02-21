@@ -5,3 +5,6 @@ Makeathon2020/__pycache__/*
 *.pyproj
 *.user
 .vs/Makeathon2020/v16/.suo
+Makeathon2020/Makeathon2020/scrapers/__pycache__/gitScraper.cpython-37.pyc
+Makeathon2020/Makeathon2020/__pycache__/views.cpython-37.pyc
+.vs/Makeathon2020/v16/.suo
