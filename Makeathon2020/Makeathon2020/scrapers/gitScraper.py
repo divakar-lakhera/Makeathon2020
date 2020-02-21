@@ -9,7 +9,7 @@ class gitScraper():
     def __init__(self):
         self.name=""
         self.html=""
-        self.repos=[]
+        self.repos=[]                                                                                           
 
 
     def loadProfile(self,link):
