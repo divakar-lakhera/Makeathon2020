@@ -1,2 +1,4 @@
 # Makeathon2020
-### Thapar Institute of Technology
+### RateMyDocs !
+#### Online CV/Resume background verifier
+
