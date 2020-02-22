@@ -98,40 +98,40 @@ class linkedinScraper():
             certifications.append(certification)
         return certifications
     
-    def getUserAccomplishments(self):
-        accomplishment = {}
-
+    def getUserHonorsAwards(self):
         honors_awards = []
         awards = self.soup.find("div",{"id":"honors-expandable-content"}).find('ul').find_all('li')
         for award in awards:
             honors_awards.append(award.get_text().strip())
-        accomplishment['honors_awards'] = honors_awards
-
+        return honors_awards
+    
+    def getUserCourses(self):
         courses = []
         course_list = self.soup.find("div", {"id":"courses-expandable-content"}).find('ul').find_all('li')
         for course in course_list:
             courses.append(course.get_text().strip())
-        accomplishment['courses'] = courses
-
+        return courses
+    
+    def getUserLanguages(self):
         languages = []
         language_list = self.soup.find('div', {"id":"languages-expandable-content"}).find('ul').find_all('li')
         for language in language_list:
             languages.append(language.get_text().strip())
-        accomplishment['languages'] = languages
+        return languages
 
+    def getUserProjects(self):
         projects = []
         project_list = self.soup.find('div', {"id":"projects-expandable-content"}).find('ul').find_all('li')
         for project in project_list:
             projects.append(project.get_text().strip())
-        accomplishment['projects'] = projects
-
+        return projects
+    
+    def getUserTestScores(self):
         test_scores = []
         test_score_list = self.soup.find('div', {"id":"test-scores-expandable-content"}).find('ul').find_all('li')
         for test_score in test_score_list:
             test_scores.append(test_score.get_text().strip())
-        accomplishment['test_scores'] = test_scores
-
-        return accomplishment
+        return test_scores
     
     def getUserSkillsEndorsements(self):
         skills = []
