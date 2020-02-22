@@ -52,14 +52,14 @@ class gitScraper():
     
     def gitFastFetchProfileBySpan(self,tag,prop):
         if(self.status != 404 and self.status != 404):
-            return self.html.find("span", {tag: prop}).get_text()
+            return self.html.find("span", {tag: prop}).get_text().lower()
         else:
             print("GitScraper:gitFastFetchProfileBySpan: Got Status 404")
         # return self.html.find("span", {"itemprop": "name"}).get_text()
        
     def gitFastFetchRepoBySpan(self,tag,prop):
         if(self.status != 404 and self.status != 404):
-            return self.repos.find("span", {tag: prop}).get_text()
+            return self.repos.find("span", {tag: prop}).get_text().lower()
         else:
             print("GitScraper:gitFastFetchRepoBySpan: Got Status 404")
     
@@ -69,7 +69,7 @@ class gitScraper():
             for i in self.repos:
                 raw_list=i.find("div",attrs={'id':'user-repositories-list'})
                 for lang in raw_list.find_all('span',attrs={'itemprop':'programmingLanguage'}):
-                    listlang+=[lang.get_text()]
+                    listlang+=[lang.get_text().lower()]
             return listlang
 
     def gitGetAllProjects(self):
@@ -78,7 +78,7 @@ class gitScraper():
             for i in self.repos:
                 raw_list=i.find("div",attrs={'id':'user-repositories-list'})
                 for name in raw_list.find_all('a',attrs={'itemprop':'name codeRepository'}):
-                    listprog.append(name.get_text().split('\n')[1].strip())
+                    listprog.append(name.get_text().split('\n')[1].strip().lower())
             return listprog
         else:
             return None
@@ -87,7 +87,7 @@ class gitScraper():
         try:
             vv= self.html.find("span", {"itemprop": "name"})
             if vv != None:
-                return vv.get_text()
+                return vv.get_text().lower()
             else:
                 return None
         except:
@@ -97,7 +97,7 @@ class gitScraper():
         try:
             fetch=self.html.find('li',{"itemprop":"homeLocation"})
             if(fetch != None):
-                return fetch.find('span',{'class':'p-label'}).get_text()
+                return fetch.find('span',{'class':'p-label'}).get_text().lower()
             else:
                 return None
         except:

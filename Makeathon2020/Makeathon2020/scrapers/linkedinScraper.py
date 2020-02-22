@@ -7,7 +7,7 @@ class linkedinScraper():
     
     def __init__(self):
         self.link=""
-        self.browser = webdriver.Chrome()
+        self.browser = webdriver.Chrome('Makeathon2020\driver\chromedriver.exe')
         self.browser.get('https://www.linkedin.com/uas/login')
 
         
@@ -81,17 +81,7 @@ class linkedinScraper():
         education = {}
 
         edu_section = self.soup.find('section',{'id':'education-section'}).find_all('ul')
-
-        for edu in edu_section.find_all('li'):
-            education['college_name'] = edu_section.find('h3').get_text().strip()
-
-            education['degree_name'] = edu_section.find('p', {'class': 'pv-entity__secondary-title pv-entity__degree-name t-14 t-black t-normal'}).find_all('span')[1].get_text().strip()
-
-            education['stream'] = edu_section.find('p', {'class': 'pv-entity__secondary-title pv-entity__fos t-14 t-black t-normal'}).find_all('span')[1].get_text().strip()
-
-            education['degree_year'] = edu_section.find('p', {'class': 'pv-entity__dates t-14 t-black--light t-normal'}).find_all('span')[1].get_text().strip()
-            educations.append(education)       
-        return educations
+        print(edu_section)
     
     def getUserLicenseAndCertifications(self):
         certifications = []
@@ -153,3 +143,9 @@ class linkedinScraper():
             skills.append(skill.get_text().strip())
         
         return skills
+
+if __name__ == "__main__":
+    profile = linkedinScraper()
+    profile.loadProfile('https://www.linkedin.com/in/kanha-khatri-567134171/')
+
+    print(profile.getUserEducation())
