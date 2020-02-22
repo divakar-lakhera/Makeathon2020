@@ -1,2 +1,2 @@
 # Makeathon2020
-## Thapar Institute of Technology
+### Thapar Institute of Technology
