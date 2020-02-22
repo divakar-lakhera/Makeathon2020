@@ -15,6 +15,7 @@ class linkeinScraper():
             self.html = BeautifulSoup(raw_page.content,'html-parser')
     
     def getUserName(self):
+        print(self.html)
         return self.html.find("li",attrs={"class":"inline t-24 t-black t-normal break-words"}).get_text()
     
     def getUserExperiences(self):
