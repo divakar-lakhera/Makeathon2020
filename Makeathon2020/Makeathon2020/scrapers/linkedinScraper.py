@@ -80,18 +80,17 @@ class linkedinScraper():
         educations = []
         education = {}
 
-        
-        for edu in self.soup.find_all('li',{"class":"pv-profile-section__sortable-item pv-profile-section__section-info-item relative pv-profile-section__sortable-item--v2 pv-profile-section__list-item sortable-item ember-view"}):
-            education['school_name'] = edu.find("h3",{"class":"pv-entity__school-name t-16 t-black t-bold"}).get_text().strip()
-            
-            education['degree_name'] = edu.find("p",{"class":"pv-entity__secondary-title pv-entity_degree-name t-14 t-black t-normal"}
-            ).find("span",{"class":"pv-entity__comma-item"}).get_text().strip()
+        edu_section = self.soup.find('section',{'id':'education-section'}).find_all('ul')
 
-            education['field_of_study'] = edu.find("p",{"class":"pv-entity__secondary-title pv-entity__fos t-14 t-black t-normal"}
-            ).find("span",{"class":"pv-entity__comma-item"}).get_text().strip()
+        for edu in edu_section.find_all('li'):
+            education['college_name'] = edu_section.find('h3').get_text().strip()
 
-            educations.append(education)
-        
+            education['degree_name'] = edu_section.find('p', {'class': 'pv-entity__secondary-title pv-entity__degree-name t-14 t-black t-normal'}).find_all('span')[1].get_text().strip()
+
+            education['stream'] = edu_section.find('p', {'class': 'pv-entity__secondary-title pv-entity__fos t-14 t-black t-normal'}).find_all('span')[1].get_text().strip()
+
+            education['degree_year'] = edu_section.find('p', {'class': 'pv-entity__dates t-14 t-black--light t-normal'}).find_all('span')[1].get_text().strip()
+            educations.append(education)       
         return educations
     
     def getUserLicenseAndCertifications(self):
@@ -111,7 +110,6 @@ class linkedinScraper():
 
         honors_awards = []
         awards = self.soup.find("div",{"id":"honors-expandable-content"})
-        print(awards)
         awards = awards.find_all("li",{"class":"pv-accomplishments-block__summary-list-item"})
         for award in awards:
             honors_awards.append(award.get_text().strip())
@@ -155,10 +153,3 @@ class linkedinScraper():
             skills.append(skill.get_text().strip())
         
         return skills
-
-if __name__ == "__main__":
-    profile = linkedinScraper()
-    profile.loadProfile("https://www.linkedin.com/in/kanha-khatri-567134171/")
-
-    print(profile.getUserAccomplishments())
-
