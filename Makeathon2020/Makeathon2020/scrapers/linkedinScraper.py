@@ -76,13 +76,16 @@ class linkedinScraper():
             experiences.append(experience)
         return experiences
     
+
     def getUserEducation(self):
         educations = []
-        education = {}
+        
 
-        edu_section = self.soup.find('section',{'id':'education-section'}).find_all('ul')
-        print(edu_section)
-    
+        edu_section = self.soup.find('section',{'id':'education-section'}).find('ul').find_all("li")
+        for edu in edu_section:
+            educations.append(edu.find('div', {"class":"pv-entity__degree-info"}).find('h3').get_text().strip())
+        return educations
+
     def getUserLicenseAndCertifications(self):
         certifications = []
         certification = {}
@@ -99,40 +102,35 @@ class linkedinScraper():
         accomplishment = {}
 
         honors_awards = []
-        awards = self.soup.find("div",{"id":"honors-expandable-content"})
-        awards = awards.find_all("li",{"class":"pv-accomplishments-block__summary-list-item"})
+        awards = self.soup.find("div",{"id":"honors-expandable-content"}).find('ul').find_all('li')
         for award in awards:
             honors_awards.append(award.get_text().strip())
-        accomplishment['honor_awards'] = honors_awards
+        accomplishment['honors_awards'] = honors_awards
 
         courses = []
-        course_list = self.soup.find("div",{"id":"courses-expandable-content",})
-        course_list = course_list.find_all("li",{"class":"pv-accomplishments-block__summary-list-item"})
+        course_list = self.soup.find("div", {"id":"courses-expandable-content"}).find('ul').find_all('li')
         for course in course_list:
             courses.append(course.get_text().strip())
         accomplishment['courses'] = courses
 
         languages = []
-        language_list = self.soup.find("div",{"id":"languages-expandable-content"})
-        language_list = language_list.find_all("li",{"class":"pv-accomplishments-block__summary-list-item"})
+        language_list = self.soup.find('div', {"id":"languages-expandable-content"}).find('ul').find_all('li')
         for language in language_list:
             languages.append(language.get_text().strip())
         accomplishment['languages'] = languages
 
         projects = []
-        project_list = self.soup.find("div",{"id":"projects-expandable-content"})
-        project_list = project_list.find_all("li",{"class":"pv-accomplishments-block__summary-list-item"})
-        for project in projects:
+        project_list = self.soup.find('div', {"id":"projects-expandable-content"}).find('ul').find_all('li')
+        for project in project_list:
             projects.append(project.get_text().strip())
-        accomplishments['projects'] = projects
+        accomplishment['projects'] = projects
 
         test_scores = []
-        test_score_list = course_list = self.soup.find("div",{"id":"test-scores-expandable-content"})
-        test_score_list = test_score_list.find_all("li",{"class":"pv-accomplishments-block__summary-list-item"})
+        test_score_list = self.soup.find('div', {"id":"test-scores-expandable-content"}).find('ul').find_all('li')
         for test_score in test_score_list:
             test_scores.append(test_score.get_text().strip())
-        accomplishments['test_scores'] = test_scores
-        
+        accomplishment['test_scores'] = test_scores
+
         return accomplishment
     
     def getUserSkillsEndorsements(self):
@@ -143,9 +141,3 @@ class linkedinScraper():
             skills.append(skill.get_text().strip())
         
         return skills
-
-if __name__ == "__main__":
-    profile = linkedinScraper()
-    profile.loadProfile('https://www.linkedin.com/in/kanha-khatri-567134171/')
-
-    print(profile.getUserEducation())
