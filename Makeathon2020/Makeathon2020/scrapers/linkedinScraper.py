@@ -77,24 +77,16 @@ class linkedinScraper():
             experiences.append(experience)
         return experiences
     
+
     def getUserEducation(self):
         educations = []
-        education = {}
-
         
-        for edu in self.soup.find_all('li',{"class":"pv-profile-section__sortable-item pv-profile-section__section-info-item relative pv-profile-section__sortable-item--v2 pv-profile-section__list-item sortable-item ember-view"}):
-            education['school_name'] = edu.find("h3",{"class":"pv-entity__school-name t-16 t-black t-bold"}).get_text().strip()
-            
-            education['degree_name'] = edu.find("p",{"class":"pv-entity__secondary-title pv-entity_degree-name t-14 t-black t-normal"}
-            ).find("span",{"class":"pv-entity__comma-item"}).get_text().strip()
 
-            education['field_of_study'] = edu.find("p",{"class":"pv-entity__secondary-title pv-entity__fos t-14 t-black t-normal"}
-            ).find("span",{"class":"pv-entity__comma-item"}).get_text().strip()
-
-            educations.append(education)
-        
+        edu_section = self.soup.find('section',{'id':'education-section'}).find('ul').find_all("li")
+        for edu in edu_section:
+            educations.append(edu.find('div', {"class":"pv-entity__degree-info"}).find('h3').get_text().strip())
         return educations
-    
+
     def getUserLicenseAndCertifications(self):
         certifications = []
         certification = {}
@@ -107,46 +99,40 @@ class linkedinScraper():
             certifications.append(certification)
         return certifications
     
-    def getUserAccomplishments(self):
-        accomplishment = {}
-
+    def getUserHonorsAwards(self):
         honors_awards = []
-        awards = self.soup.find("div",{"id":"honors-expandable-content"})
-        print(awards)
-        awards = awards.find_all("li",{"class":"pv-accomplishments-block__summary-list-item"})
+        awards = self.soup.find("div",{"id":"honors-expandable-content"}).find('ul').find_all('li')
         for award in awards:
             honors_awards.append(award.get_text().strip())
-        accomplishment['honor_awards'] = honors_awards
-
+        return honors_awards
+    
+    def getUserCourses(self):
         courses = []
-        course_list = self.soup.find("div",{"id":"courses-expandable-content",})
-        course_list = course_list.find_all("li",{"class":"pv-accomplishments-block__summary-list-item"})
+        course_list = self.soup.find("div", {"id":"courses-expandable-content"}).find('ul').find_all('li')
         for course in course_list:
             courses.append(course.get_text().strip())
-        accomplishment['courses'] = courses
-
+        return courses
+    
+    def getUserLanguages(self):
         languages = []
-        language_list = self.soup.find("div",{"id":"languages-expandable-content"})
-        language_list = language_list.find_all("li",{"class":"pv-accomplishments-block__summary-list-item"})
+        language_list = self.soup.find('div', {"id":"languages-expandable-content"}).find('ul').find_all('li')
         for language in language_list:
             languages.append(language.get_text().strip())
-        accomplishment['languages'] = languages
+        return languages
 
+    def getUserProjects(self):
         projects = []
-        project_list = self.soup.find("div",{"id":"projects-expandable-content"})
-        project_list = project_list.find_all("li",{"class":"pv-accomplishments-block__summary-list-item"})
-        for project in projects:
+        project_list = self.soup.find('div', {"id":"projects-expandable-content"}).find('ul').find_all('li')
+        for project in project_list:
             projects.append(project.get_text().strip())
-        accomplishments['projects'] = projects
-
+        return projects
+    
+    def getUserTestScores(self):
         test_scores = []
-        test_score_list = course_list = self.soup.find("div",{"id":"test-scores-expandable-content"})
-        test_score_list = test_score_list.find_all("li",{"class":"pv-accomplishments-block__summary-list-item"})
+        test_score_list = self.soup.find('div', {"id":"test-scores-expandable-content"}).find('ul').find_all('li')
         for test_score in test_score_list:
             test_scores.append(test_score.get_text().strip())
-        accomplishments['test_scores'] = test_scores
-        
-        return accomplishment
+        return test_scores
     
     def getUserSkillsEndorsements(self):
         skills = []
