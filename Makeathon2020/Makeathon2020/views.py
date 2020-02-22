@@ -10,7 +10,7 @@ from Makeathon2020.scrapers import gitScraper as gits
 
 # init
 gitAcc=gits.gitScraper()
-gitAcc.loadProfile("https://github.com/divakar-lakhera/")
+gitAcc.loadProfile("https://github.com/D4N")
 print(gitAcc.gitGetUserName())
 print(gitAcc.gitGetAllLanguages())
 print(gitAcc.gitGetAllProjects())

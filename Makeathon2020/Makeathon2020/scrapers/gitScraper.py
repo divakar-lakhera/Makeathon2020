@@ -20,6 +20,7 @@ class gitScraper():
         if(raw_page.status_code!=200 or raw_rep.status_code !=200):
             print("GitScraper: Request Failed.. Got "+str(raw_page.status_code))
             self.status=raw_page.status_code
+            return self.status
         else:
             self.html=BeautifulSoup(raw_page.content,'html.parser')
             repStart=BeautifulSoup(raw_rep.content,'html.parser')
@@ -83,21 +84,21 @@ class gitScraper():
             return None
 
     def gitGetUserName(self):
-        if(self.status != 404 and self.status != 404):
+        try:
             vv= self.html.find("span", {"itemprop": "name"})
             if vv != None:
                 return vv.get_text()
             else:
                 return None
-        else:
-            return None
+        except:
+            print("gitGetUserName: Exception Occured")
 
     def gitGetLocation(self):
-        if(self.status != 404 and self.status != 404):
+        try:
             fetch=self.html.find('li',{"itemprop":"homeLocation"})
             if(fetch != None):
                 return fetch.find('span',{'class':'p-label'}).get_text()
             else:
                 return None
-        else:
-            return None
+        except:
+            print("gitGetLocation: Exception Occured")
