@@ -8,12 +8,13 @@ class linkedinScraper():
     def __init__(self):
         self.link=""
         self.browser = webdriver.Chrome('Makeathon2020\driver\chromedriver.exe')
+        # self.browser=webdriver.Edge()
         self.browser.get('https://www.linkedin.com/uas/login')
 
         
-        time.sleep(1)
+        time.sleep(random.randint(1,5))
 
-        self.email = 'wajije1434@kamismail.com'
+        self.email = 'gispakitra@enayu.com'
         self.password = 'helloworld123'
 
         elementID = self.browser.find_element_by_id('username')
@@ -22,7 +23,7 @@ class linkedinScraper():
         elementID = self.browser.find_element_by_id('password')
         elementID.send_keys(self.password)
 
-        time.sleep(1)
+        time.sleep(random.randint(2,6))
 
         elementID.submit()
 
@@ -34,7 +35,7 @@ class linkedinScraper():
         self.link=link
         self.browser.get(link)
 
-        SCROLL_PAUSE_TIME = 2
+        SCROLL_PAUSE_TIME = random.randint(2,5)
 
         # Get scroll height
         last_height = self.browser.execute_script("return document.body.scrollHeight")

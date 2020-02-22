@@ -160,24 +160,24 @@ class pdfParser():
 
         if fg==0:
             print("Name Verification Failed [CV]");
-            return 0
+            return "Name Verification Failed [CV]"
                
         if(self.isGit==1 and self.githubName != self.user):
             print("Fatal: Name match error [GitHub]")
             print(self.githubName)
-            return 0
+            return "Fatal: Name match error [GitHub]"
         else:
             points+=1
         
         if(self.isStack==1 and self.stackName != self.user):
             print("Fatal: Name match error [StackOverFlow]")
-            return 0
+            return "Fatal: Name match error [StackOverFlow]"
         else:
             points+=1
 
         if(self.isLinked==1 and self.linkedinName != self.user):
             print("Fatal: Name match error [LinkedIn]")
-            return 0
+            return "Fatal: Name match error [LinkedIn]"
         else:
             points+=1
 

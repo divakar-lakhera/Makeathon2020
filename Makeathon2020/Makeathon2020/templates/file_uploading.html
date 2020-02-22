@@ -81,7 +81,7 @@
 						<form action="{{url_for('result')}}" method="POST" enctype="multipart/form-data">
 							<div class="form-group">
 								<label><h3>Enter name</h3></label>
-								<input type="text" name="" placeholder="Enter name please..." class="form-control" required>
+								<input type="text" name="name" placeholder="Enter name please..." class="form-control" required>
 							</div>
 
 							<div class="form-group">
@@ -96,7 +96,7 @@
 
 							<div class="form-group">
 								<label><h3>Stackoverflow Url</h3></label>
-								<input type="url" name="stackoverflow" class="form-control" placeholder="Url please...">
+								<input type="text" name="stackoverflow" class="form-control" placeholder="Url please...">
 							</div>
 
 							<div class="form-group">
@@ -119,7 +119,7 @@
 						</div>
 
 						<div class="col-xl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-4 result-div " id="result-div">
-							afdsg
+							{{acc}}
 						</div>
 					</div>
 				</div>
