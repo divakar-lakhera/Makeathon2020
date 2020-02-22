@@ -1,5 +1,9 @@
+<!-- FORM -->
+	<!-- written by Pankaj Kumar -->
+	<!-- Babayaga(Nit Uttarakhand) -->
+	
 <!DOCTYPE html>
-<html>
+<html lang="eng">
 <head>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="refresh" content="2"> -->
@@ -21,12 +25,15 @@
 
 
 	<style type="text/css">
+		body
+		{
+			font-family: 'Raleway';
+		}
 		.process-div
 		{
 			padding: 16px;
 			border-radius: 7px;
-			/*color:;*/
-			font-family: 'Raleway';
+			background-color: ;
 			font-size: 18px;
 			text-transform: capitalize;
 			font-weight: 800;
@@ -50,14 +57,15 @@
 			text-transform: capitalize;
 			font-size: 20px;
 			color: green;
-			font-weight: 900;
+			font-weight: 800;
 		}
+
 	</style>
 </head>
 <body>
 	<div class="container main-div">
 		<div class="row">
-			<div class="first-ro col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12">
+			<div class="col-xl-offset-3 col-xl-6 col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12">
 				<div class="">
 					<div class="text-center image">
 						<img src="{{ url_for('static', filename='file_uploading.png')}}" class="img-circle image-responsive img-thumbnail img-fluid" alt="file-image">
@@ -71,26 +79,26 @@
 						<form action="{{url_for('result')}}" method="POST" enctype="multipart/form-data">
 							<div class="form-group">
 								<label><h3>Enter name</h3></label>
-								<input type="text" name="name" placeholder="Enter name please..." class="form-control" required>
+								<input type="text" name="" placeholder="Enter name please..." class="form-control" required>
 							</div>
 
 							<div class="form-group">
-								<label>LinkedIn Url:</label>
-								<input type="url" name="linkedin_url" class="form-control" placeholder="Url please..." required>
+								<label><h3>LinkedIn Url</h3></label>
+								<input type="url" name="linkedin" class="form-control" placeholder="Url please..." required>
 							</div>
 
 							<div class="form-group">
-								<label>Github Url:</label>
-								<input type="url" name="github_url" class="form-control" placeholder="Url please..." required>
+								<label><h3>Github Url</h3></label>
+								<input type="url" name="github" class="form-control" placeholder="Url please..." required>
 							</div>
 
 							<div class="form-group">
-								<label>Stackoverflow Url:</label>
-								<input type="Url" name="stackoverflow_url" class="form-control" placeholder="url please...">
+								<label><h3>Stackoverflow Url</h3></label>
+								<input type="url" name="stackoverflow" class="form-control" placeholder="Url please...">
 							</div>
 
 							<div class="form-group">
-								<input type="file" name="resume" id="file" required>
+								<input type="file" name="file" id="file" required>
 							</div>
 
 							<div class="form-group text-center">
@@ -102,18 +110,19 @@
 				
 				</div>
 				<!-- this div contain score will updated by divakar lakhera. -->
-				<div class="score-div jumbotron">
-					<div>Your result.....</div>
-					<!-- result come in this div -->
-					<!-- id of use if result-div -->
-					<div class="result-div text-center" id="result-div">
-						qualified
+				<div class="jumbotron answer-div">
+					<div class="row score-div">
+						<div class="col-xl-4 col-lg-4 col-sm-4 col-md-6 col-xs-3 col-xl-4">
+							Your result ...
+						</div>
+
+						<div class="col-xl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-4 result-div " id="result-div">
+							afdsg
+						</div>
 					</div>
 				</div>
-
 			</div>
-		
-		<div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 process-div">
+		<div class="col-xl-offset-3 col-xl-6 col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 process-div">
 			<div class="processing" id="processing">
 				aflydh
 			</div>

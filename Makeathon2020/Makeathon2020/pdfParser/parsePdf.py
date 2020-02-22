@@ -11,26 +11,35 @@ import Makeathon2020.scrapers.stackScraper as stackLab
 class pdfParser():
     def __init__(self,file,uname,gitLink,stackLink,linkedinLink):
        self.pdf = pdfx.PDFx(file)
+       # user data from CV and provided
        self.user=uname
+       self.rawResume=""
+       self.resumeLang=[]
+       # - 
+       # GitHub
        self.github=""
        self.githubName=""
-       self.linkedin=""
        self.githubLocation=""
+       self.isGit=0
+       self.gitAccount=gitLink
+       self.lang=[]
+       self.proj=[]
+       # -
+       # StackOverFlow
        self.stack=""
        self.stackName=""
        self.stackLang=""
-       self.lang=[]
-       self.proj=[]
-       self.certi=[]
-       self.gitAccount=gitLink
        self.stackAccount=stackLink
-       self.linkedinAccount=linkedinLink
-       self.isGit=0
        self.isStack=0
+       # -
+       # LinkedIn 
+       self.linkedin=""
+       self.certi=[]
+       self.linkedinAccount=linkedinLink
        self.isLinked=0
        self.linkedinName=""
-       self.rawResume=""
-       self.resumeLang=[]
+       # -
+       self.stringPool={}
        self.dummyLang=['python',"python3",'html','css','html5',"html 5",'css3',"css 3",'js','javascript','php','ajax','kotlin',"c++","c","java","swift","golang","c#","scala","kotlin","ruby","assembly"]
        if gitLink != None:
            self.isGit=1
@@ -74,7 +83,35 @@ class pdfParser():
     def dumpContent(self):
         print("Dumping Content..")
         print(self.githubName)
+        print(self.lang)
+        print(self.proj)
+        print("done..")
+        
+    def generateStringPool(self,strings):
+        print("Generating Pool")
+        for i in strings:
+            t=i.split(" ")
+            if(len(t)>=2):
+                self.stringPool[t[0]]=t[1]
+            else:
+                self.stringPool[t[0]]=None
+        print("Done")
 
+    def dumpStringPool(self):
+        print(self.stringPool)
+
+    def flushStringPool(self):
+        self.stringPool={}
+
+    def checkPool(self):
+        temp=self.rawResume.split(" ")
+        for i in range(len(temp)-1):
+            if temp[i].strip().strip('\n') in self.stringPool.keys():
+                print(temp[i])
+                if(self.stringPool[temp[i].strip().strip('\n')]==None):
+                    print("Got")
+                elif(self.stringPool[temp[i].strip().strip('\n')]==temp[i+1].strip().strip('\n')):
+                    print("Got 2")
 
     def processCV(self):
         print("Pre-Processing CV..")
@@ -88,7 +125,7 @@ class pdfParser():
             elif i[0:len(i)-1] in self.dummyLang:
                 print(i[0:len(i)-1])
                 self.resumeLang+=[i[0:len(i)-1]]
-
+        self.generateStringPool(self.proj)
 
         print("Done..")
 
@@ -120,7 +157,20 @@ class pdfParser():
         maxpoints+=3
 
         #Check Languages
+        langpts=0
+        maxlang=len(self.resumeLang)
 
-        
-        
+        for i in self.resumeLang:
+            if i in self.lang:
+                langpts+=1
 
+        if(langpts > maxlang):
+            #error due to uncertainity
+            langpts=maxlang
+        points+=langpts
+        maxpoints+=maxlang
+
+        #Check Projects
+
+        #generate string pool
+        self.generateStringPool(self.proj)

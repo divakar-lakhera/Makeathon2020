@@ -26,7 +26,8 @@ class linkedinScraper():
 
         elementID.submit()
 
-        
+    def killDriver(self):
+        self.browser.close();
         
     
     def loadProfile(self, link):
