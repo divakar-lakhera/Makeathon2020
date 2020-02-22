@@ -78,7 +78,11 @@ class gitScraper():
             for i in self.repos:
                 raw_list=i.find("div",attrs={'id':'user-repositories-list'})
                 for name in raw_list.find_all('a',attrs={'itemprop':'name codeRepository'}):
-                    listprog.append(name.get_text().split('\n')[1].strip().lower())
+                    pname=name.get_text().split('\n')[1].strip().lower()
+                    final=" "
+                    for k in pname.split("-"):
+                        final+=(k+" ")
+                    listprog.append(final.strip())
             return listprog
         else:
             return None

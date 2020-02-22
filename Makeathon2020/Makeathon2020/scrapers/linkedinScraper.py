@@ -26,7 +26,8 @@ class linkedinScraper():
 
         elementID.submit()
 
-        
+    def killDriver(self):
+        self.browser.close();
         
     
     def loadProfile(self, link):
@@ -155,9 +156,3 @@ class linkedinScraper():
             skills.append(skill.get_text().strip())
         
         return skills
-
-if __name__ == "__main__":
-    profile = linkedinScraper()
-    profile.loadProfile("https://www.linkedin.com/in/kanha-khatri-567134171/")
-
-    print(profile.getUserAccomplishments())
