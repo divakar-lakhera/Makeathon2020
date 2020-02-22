@@ -1,19 +1,22 @@
 """
 Routes and views for the flask application.
 """
-
+import os
+import subprocess
+import shutil
 from datetime import datetime
 from flask import render_template, request, redirect
+from werkzeug.utils import secure_filename
 from Makeathon2020 import app
 from Makeathon2020.scrapers import *
 from Makeathon2020.pdfParser import parsePdf as ppar
 
 # init
-
+"""
 newparser = ppar.pdfParser("Makeathon2020/server/test2.pdf","Pankaj Kumar","https://github.com/Pankajcoder1",None,"https://www.linkedin.com/in/pankaj-kumar-795b48198/")
 newparser.loadLinks()
 newparser.processCV()
-
+"""
 """
 gitAcc=gits.gitScraper()
 gitAcc.loadProfile("https://github.com/divakar-lakhera")
@@ -39,9 +42,17 @@ def result():
 
     stackoverflow_url = request.form.get("stackoverflow_url")
 
-    resume = request.files['resume']
-    resume.filename = "test.pdf"
-    resume.save("../server/"+resume.filename)
-
-    return render_template("file_uploading.html")
+    if request.method == 'POST':
+        if 'resume' not in request.files:
+            return redirect(request.url)
+        resume = request.files['resume']
+        if resume:
+            filename = secure_filename(resume.filename)
+            resume.filename = "test.pdf"
+            resume.save(resume.filename)
+            
+            subprocess.call("mv %s %s" % (os.getcwd() + "/test.pdf", os.getcwd() + "/Makeathon2020/server/"), shell=True)
+            return redirect('/')
+    else:
+        return redirect(request.url)
 
