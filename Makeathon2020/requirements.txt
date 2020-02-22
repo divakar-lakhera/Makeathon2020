@@ -1,1 +1,4 @@
 Flask<1
+bs4
+linkedin_scraper
+selenium
