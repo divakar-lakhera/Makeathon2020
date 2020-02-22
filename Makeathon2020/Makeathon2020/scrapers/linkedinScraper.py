@@ -80,8 +80,6 @@ class linkedinScraper():
 
     def getUserEducation(self):
         educations = []
-        
-
         edu_section = self.soup.find('section',{'id':'education-section'}).find('ul').find_all("li")
         for edu in edu_section:
             educations.append(edu.find('div', {"class":"pv-entity__degree-info"}).find('h3').get_text().strip())
