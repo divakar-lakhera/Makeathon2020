@@ -14,8 +14,8 @@ class linkedinScraper():
         
         time.sleep(random.randint(1,5))
 
-        self.email = 'gispakitra@enayu.com'
-        self.password = 'helloworld123'
+        self.email = '-add--your--linked--in--id--here'
+        self.password = '--addYourPasswordHere--'
 
         elementID = self.browser.find_element_by_id('username')
         elementID.send_keys(self.email)
