@@ -12,7 +12,7 @@
 * Selenium
 * Web Stack (HTML 5 and CSS 3)
 
-## Team BabaYaga (National Institute Of Technology, Uttarakhand)
+## Team Babayaga (National Institute Of Technology, Uttarakhand)
 * Divakar Lakhera
 * Pankaj Kumar
 * Kanha Khatri
